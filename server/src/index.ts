@@ -3,6 +3,7 @@ import express from 'express';
 import cors from 'cors';
 import http from 'http';
 import { Server as IOServer } from 'socket.io';
+import gamesRouter from './routes/games';
 
 const app = express();
 const server = http.createServer(app);
@@ -14,6 +15,9 @@ app.use(cors({ origin: process.env.CLIENT_ORIGIN || 'http://localhost:5173' }));
 app.use(express.json());
 
 app.get('/health', (_req, res) => res.json({ ok: true }));
+
+// REST API
+app.use('/api', gamesRouter);
 
 io.on('connection', (socket) => {
   console.log('socket connected', socket.id);

@@ -5,5 +5,5 @@ export default function MainPage() {
       <button className="border-2">Start Game</button>
       <p>(Step 0 placeholder UI — functionality next steps)</p>
     </div>
-  )
+  );
 }
