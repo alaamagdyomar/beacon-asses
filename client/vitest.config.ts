@@ -1,4 +1,5 @@
-import { defineConfig } from 'vite';
+// vitest.config.ts
+import { defineConfig } from 'vitest/config';
 import react from '@vitejs/plugin-react';
 import path from 'path';
 import tailwindcss from '@tailwindcss/vite';
@@ -14,7 +15,12 @@ export default defineConfig({
       '@hooks': path.resolve(__dirname, './src/hooks'),
       '@lib': path.resolve(__dirname, './src/lib'),
       '@types': path.resolve(__dirname, './src/types'),
-      '@test': path.resolve(__dirname, './src/test'),
     },
+  },
+  test: {
+    globals: true,
+    environment: 'jsdom',
+    setupFiles: './src/test/setupTests.ts',
+    include: ['src/**/*.test.{ts,tsx}'],
   },
 });

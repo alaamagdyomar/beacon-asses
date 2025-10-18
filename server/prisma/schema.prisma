@@ -9,9 +9,25 @@ generator client {
 
 model Game {
   id        String   @id @default(cuid())
+  roomId    String   @unique
   player1   String?
   player2   String?
-  winner    String?   // "Player 1" | "Player 2" | "Draw"
-  moves     Json?
+  winner    String?
   createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  moves     Move[]
+  
+  @@index([createdAt])
+}
+
+model Move {
+  id        String   @id @default(cuid())
+  gameId    String
+  index     Int       
+  player    String    
+  createdAt DateTime  @default(now())
+
+  game      Game      @relation(fields: [gameId], references: [id], onDelete: Cascade)
+
+  @@index([gameId])
 }
