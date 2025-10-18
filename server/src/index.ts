@@ -11,8 +11,9 @@ import { registerSocketHandlers } from "./socket/index";
 // ───────────────────────────────
 const app = express();
 
+const clientOrigin = process.env.CLIENT_ORIGIN || "http://localhost:5173";
 // Allow JSON requests and CORS (for local frontend)
-app.use(cors({ origin: process.env.CLIENT_ORIGIN || "http://localhost:5173" }));
+app.use(cors({ origin: clientOrigin || "http://localhost:5173" }));
 app.use(express.json());
 
 // Health check endpoint
@@ -40,4 +41,5 @@ const port = Number(process.env.PORT) || 4000;
 
 server.listen(port, () => {
   console.log(`🚀 Server running on http://localhost:${port}`);
+  console.log(`🌐 CORS origin: ${clientOrigin}`);
 });
