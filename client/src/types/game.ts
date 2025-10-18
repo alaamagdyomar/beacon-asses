@@ -1,7 +1,8 @@
-export interface Game {
+export type Winner = 'X' | 'O' | 'Draw' | null;
+
+export interface GameSummary {
   id: string;
-  player1: string;
-  player2: string;
-  winner: string;
+  roomId: string;
+  winner: Winner;
   createdAt: string;
 }

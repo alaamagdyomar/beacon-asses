@@ -8,7 +8,15 @@ vi.mock('@lib/axiosClient', () => ({
 
 describe('fetchGames', () => {
   it('returns games on success', async () => {
-    const mock = [{ id: '1', player1: 'A', player2: 'B', winner: 'A', createdAt: '2025-10-17' }];
+    const mock = [
+      {
+        id: '1',
+        player1: 'A',
+        player2: 'B',
+        winner: 'A',
+        createdAt: '2025-10-17',
+      },
+    ];
     (axios.get as any).mockResolvedValue({ data: mock });
     const data = await fetchGames();
     expect(axios.get).toHaveBeenCalledWith('/games');
